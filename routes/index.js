@@ -1,11 +1,12 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const router = express().use(bodyParser.json())
+const { Configuration, OpenAIApi } = require("openai");
 
 
-router.post('/', async (req, res) => {
+router.post('/complete', async (req, res) => {
     // do something
-    console.log(req.body)
+    let needsComplete = req.body.string
     // url = ""
     // settings = {}
     // const resp = await fetch(url, settings)
@@ -14,25 +15,24 @@ router.post('/', async (req, res) => {
 
     // resp is the object that is returned
     // return it as a response
-    const { Configuration, OpenAIApi } = require("openai");
 
     const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey: "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",
     });
     const openai = new OpenAIApi(configuration);
 
     const response = await openai.createCompletion("text-davinci-001", {
-    prompt: "",
-    temperature: 0.7,
-    max_tokens: 64,
-    top_p: 1,
-    frequency_penalty: 0,
-    presence_penalty: 0,
+        prompt: `Complete the sentence: ${needsComplete} `,
+        max_tokens: 100,
     });
 
+    // console.log(response)
+    console.log(response.data.choices)
 
-    return res.json({newString: "YAY"})
+    return res.json({newString: response.data.choices[0].text})
 })
+
+
 
 router.get('/', async (req, res) => {
     // render a template
