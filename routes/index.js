@@ -33,7 +33,6 @@ router.post('/complete', async (req, res) => {
 })
 
 
-
 router.get('/', async (req, res) => {
     // render a template
     // return some version of that
