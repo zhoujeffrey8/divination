@@ -1,0 +1,27 @@
+{
+  "name": "divination",
+  "version": "1.0.0",
+  "description": "smart text editor",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "devStart": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhoujeffrey8/divination.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhoujeffrey8/divination/issues"
+  },
+  "homepage": "https://github.com/zhoujeffrey8/divination#readme",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "express": "^4.17.3",
+    "express-ejs-layouts": "^2.5.1",
+    "fetch": "^1.1.0",
+    "nodemon": "^2.0.15"
+  }
+}
