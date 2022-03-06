@@ -1,0 +1,2 @@
+# divination
+smart text editor
