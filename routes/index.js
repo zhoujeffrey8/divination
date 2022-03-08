@@ -15,9 +15,8 @@ router.post('/complete', async (req, res) => {
 
     // resp is the object that is returned
     // return it as a response
-
     const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: "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",
     });
     const openai = new OpenAIApi(configuration);
 
@@ -32,6 +31,10 @@ router.post('/complete', async (req, res) => {
     return res.json({newString: response.data.choices[0].text})
 })
 
+router.get("/api", (req, res) => {
+    res.json({ message: "Hello from server!" });
+  });
+
 
 router.get('/', async (req, res) => {
     // render a template
@@ -39,4 +42,3 @@ router.get('/', async (req, res) => {
 })
 
 module.exports = router
-
