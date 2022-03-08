@@ -16,11 +16,11 @@ router.post('/complete', async (req, res) => {
     // resp is the object that is returned
     // return it as a response
     const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: "",
     });
     const openai = new OpenAIApi(configuration);
 
-    const response = await openai.createCompletion("text-davinci-001", {
+    const response = await openai.createCompletion("text-ada-001", {
         prompt: `Complete the sentence: ${needsComplete} `,
         max_tokens: 100,
     });
