@@ -3,7 +3,6 @@ const bodyParser = require('body-parser')
 const router = express().use(bodyParser.json())
 const { Configuration, OpenAIApi } = require("openai");
 
-
 router.post('/complete', async (req, res) => {
     // do something
     let needsComplete = req.body.string

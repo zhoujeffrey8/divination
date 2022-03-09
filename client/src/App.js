@@ -28,7 +28,7 @@ function App() {
             console.log(res.newString)
             await setCurrDocTxt(
               prevDocTxt => prevDocTxt.replace(questionPattern, res.newString
-              ));
+              ).replace(/(\r\n|\n|\r)/gm, ""));
         }
     }
 
@@ -38,10 +38,10 @@ function App() {
           {/*  <img src={logo} className="App-logo" alt="logo" />*/}
           {/*  <p>{!data ? "Loading..." : data}</p>*/}
           {/*</header>*/}
-              
+          <div class="container mx-auto pt-20">
           <input className="w-full p-2 outline-none py-3 text-4xl px-3" type="text" placeholder="Title" />
         <textarea value={ currDocTxt } onChange={ handleChange } id="message" type="message" name="message" placeholder="Write here..." class=" w-screen h-screen p-3 mt-2 rounded-lg text-gray-700 focus:outline-none"></textarea>
-
+        </div>
         </div>
     );
 }
