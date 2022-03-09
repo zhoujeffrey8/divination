@@ -38,8 +38,10 @@ function App() {
           {/*  <img src={logo} className="App-logo" alt="logo" />*/}
           {/*  <p>{!data ? "Loading..." : data}</p>*/}
           {/*</header>*/}
-          <textarea value={ currDocTxt } onChange={ handleChange }/>
-          <button>Submit</button>
+              
+          <input className="w-full p-2 outline-none py-3 text-4xl px-3" type="text" placeholder="Title" />
+        <textarea value={ currDocTxt } onChange={ handleChange } id="message" type="message" name="message" placeholder="Write here..." class=" w-screen h-screen p-3 mt-2 rounded-lg text-gray-700 focus:outline-none"></textarea>
+
         </div>
     );
 }
