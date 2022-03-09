@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React from 'react';
-
+import DivBar from './DivBar'
 function App() {
 
     const [currDocTxt, setCurrDocTxt] = React.useState('')
@@ -39,9 +39,13 @@ function App() {
           {/*  <p>{!data ? "Loading..." : data}</p>*/}
           {/*</header>*/}
           <div class="container mx-auto pt-20">
+
           <input className="w-full p-2 outline-none py-3 text-4xl px-3" type="text" placeholder="Title" />
         <textarea value={ currDocTxt } onChange={ handleChange } id="message" type="message" name="message" placeholder="Write here..." class=" w-screen h-screen p-3 mt-2 rounded-lg text-gray-700 focus:outline-none"></textarea>
+
         </div>
+        <DivBar></DivBar>
+
         </div>
     );
 }
