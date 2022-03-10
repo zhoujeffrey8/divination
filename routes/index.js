@@ -20,7 +20,7 @@ router.post('/complete', async (req, res) => {
     });
     const openai = new OpenAIApi(configuration);
 
-    const response = await openai.createCompletion("text-ada-001", {
+    const response = await openai.createCompletion("text-davinci-001", {
         prompt: `${needsComplete} `,
         max_tokens: 100,
     });
