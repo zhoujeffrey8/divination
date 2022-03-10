@@ -13,32 +13,59 @@ router.post('/complete', async (req, res) => {
     // url and settings are both variables
     //       .then(response => response.json())
 
-    // resp is the object that is returned
+    // resp is the object that is sent to the server
     // return it as a response
     const configuration = new Configuration({
     apiKey: process.env.OPEN_AI_API_KEY,
     });
     const openai = new OpenAIApi(configuration);
 
+    console.log(needsComplete)
     const response = await openai.createCompletion("text-davinci-001", {
-        prompt: `${needsComplete} `,
+        prompt: `Complete this sentence: ${needsComplete} `,
         max_tokens: 100,
     });
 
     // console.log(response)
     console.log(response.data.choices)
 
-    return res.json({newString: response.data.choices[0].text})
+    let newString = ""
+
+    for (const responseText in response.data.choices) {
+        newString.concat(responseText.text)
+    }
+
+    return res.json({
+        newString: newString
+    })
+})
+
+router.post("/question", async (req, res) => {
+    let question = req.body.string
+
+    const configuration = new Configuration({
+        apiKey: process.env.OPEN_AI_API_KEY,
+    })
+    const openai = new OpenAIApi(configuration)
+
+    const response = await openai.createCompletion("text-davinci-001", {
+        prompt: `${question}`,
+        max_tokens: 100,
+    })
+
+    let newString = ""
+
+    for (const responseText in response.data.choices) {
+        newString.concat(responseText.text)
+    }
+
+    return res.json({
+        newString: newString
+    })
 })
 
 router.get("/api", (req, res) => {
     res.json({ message: "Hello from server!" });
-  });
-
-
-router.get('/', async (req, res) => {
-    // render a template
-    // return some version of that
 })
 
 module.exports = router
