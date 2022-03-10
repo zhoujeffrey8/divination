@@ -27,13 +27,14 @@ router.post('/complete', async (req, res) => {
     });
 
     // console.log(response)
-    console.log(response.data.choices)
+    // console.log(response.data.choices)
 
     let newString = ""
 
-    for (const responseText in response.data.choices) {
-        newString.concat(responseText.text)
+    for (const responseText of response.data.choices) {
+        newString = newString.concat(responseText.text)
     }
+    // console.log(newString)
 
     return res.json({
         newString: newString
@@ -55,9 +56,11 @@ router.post("/question", async (req, res) => {
 
     let newString = ""
 
-    for (const responseText in response.data.choices) {
-        newString.concat(responseText.text)
+    // add the text objects into one string
+    for (const responseText of response.data.choices) {
+        newString = newString.concat(responseText.text)
     }
+    // console.log(newString)
 
     return res.json({
         newString: newString
