@@ -13,6 +13,30 @@ function App() {
           string: event.target.value
         }
 
+        const lastTwoChars = currDocTxt.substring(currDocTxt.length - 2)
+        if(lastTwoChars.includes("/a")) {
+            const lastPeriodIndex = currDocTxt.lastIndexOf('.')
+            const lastSentence = currDocTxt.substring(lastPeriodIndex)
+
+            postData.string = lastSentence
+
+
+            const res = await fetch("/complete", {
+                method: "Post",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(postData)
+            })
+                .then((res) => res.json())
+            console.log(res.newString)
+            await setCurrDocTxt(
+              prevDocTxt => prevDocTxt.replace(lastSentence, res.newString
+              ).replace(/(\r\n|\n|\r)/gm, ""));
+
+        }
+
+
         const questionPattern = /\[(.*)\]/g;
         const questionFound = currDocTxt.match(questionPattern);
         console.log(questionFound);
