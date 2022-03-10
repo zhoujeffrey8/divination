@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React from 'react';
-import DivBar from './DivBar'
+import Header from './header'
 function App() {
 
     const [currDocTxt, setCurrDocTxt] = React.useState('')
@@ -58,20 +58,46 @@ function App() {
 
     return (
         <div className="App">
+        <div className="bg-slate-400">
+        
+            <Header></Header>
+
+
           {/*<header className="App-header">*/}
           {/*  <img src={logo} className="App-logo" alt="logo" />*/}
           {/*  <p>{!data ? "Loading..." : data}</p>*/}
           {/*</header>*/}
-          <div class="container mx-auto pt-20 items-center">
-              <div className="w-3/5 mx-auto" >
-                  <input className="w-full outline-none py-3 text-4xl" type="text" placeholder="Title" />
+
+{/* <!-- Animate On Page Load --> */}
+
+{document.addEventListener("DOMContentLoaded", function(){
+    setTimeout(function(){
+        var replacers = document.querySelectorAll('[data-replace]');
+        for(var i=0; i<replacers.length; i++){
+            console.log('hit here2');
+            let replaceClasses = JSON.parse(replacers[i].dataset.replace.replace(/'/g, '"'));
+            Object.keys(replaceClasses).forEach(function(key) {
+                replacers[i].classList.remove(key);
+                replacers[i].classList.add(replaceClasses[key]);
+            });
+        }
+    }, 1);
+})}
+          <div class="duration-700 relative transform opacity-0 transition-all translate-y-12 ease-out" data-replace='{ "translate-y-12": "translate-y-0", "opacity-0": "opacity-100" }'>
+
+            <div class="container mx-auto py-10 items-center shadow-lg">
+              <div className="w-3/5 mx-auto h-screen" >
+                  <input className="w-full outline-none py-10 text-4xl" type="text" placeholder="Title" />
                   <textarea value={currDocTxt} onChange={handleChange} id="message" type="message" name="message" placeholder="Write here..." className="w-full h-96 mt-2 rounded-lg text-gray-700 focus:outline-none"></textarea>
+              </div>
               </div>
 
 
-        </div>
-        <DivBar></DivBar>
+            </div>
 
+
+
+            </div>
         </div>
     );
 }
