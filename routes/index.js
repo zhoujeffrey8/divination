@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const router = express().use(bodyParser.json())
 const { Configuration, OpenAIApi } = require("openai");
+require('dotenv').config()
 
 router.post('/complete', async (req, res) => {
     // do something
@@ -15,7 +16,7 @@ router.post('/complete', async (req, res) => {
     // resp is the object that is returned
     // return it as a response
     const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: process.env.OPEN_AI_API_KEY,
     });
     const openai = new OpenAIApi(configuration);
 

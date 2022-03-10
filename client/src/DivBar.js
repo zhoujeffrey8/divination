@@ -1,5 +1,7 @@
 import CrystalBall from './CrystalBall.png';
-
+import {useHotkeys} from 'react-hotkeys-hook';
+import App from './App'
+ 
 
 export default function DivBar() {
 
@@ -15,7 +17,15 @@ export default function DivBar() {
             </div>
             <input autofocus placeholder="Generate an outline..." name="q"
                 class="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none text-lg"
-                id="search"></input>
+                id="search"
+                onKeyPress={(ev) => {
+                    if (ev.key === "Enter") {
+                        App.handleChange(ev)
+                        console.log(ev.target.value);
+                    }
+                  }}
+                
+                ></input>
 
         </div>
 </div>
