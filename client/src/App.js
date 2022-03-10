@@ -15,7 +15,7 @@ function App() {
 
         // autocomplete
         const lastTwoChars = currDocTxt.substring(currDocTxt.length - 2)
-        if(lastTwoChars.includes("/a")) {
+        if (lastTwoChars.includes("/a")) {
             const lastPeriodIndex = currDocTxt.lastIndexOf('.')
             let lastSentence = currDocTxt.substring(lastPeriodIndex + 1)
             if (lastSentence.charAt(0) === ' ') {
