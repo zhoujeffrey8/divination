@@ -2,7 +2,6 @@ import logo from './logo.svg'
 import './App.css'
 import React from 'react'
 import Header from './header'
-
 function App() {
 
     const [currDocTxt, setCurrDocTxt] = React.useState('')
@@ -14,10 +13,21 @@ function App() {
           string: event.target.value
         }
 
-        const lastTwoChars = currDocTxt.substring(currDocTxt.length - 2)
-        if(lastTwoChars.includes("/a")) {
-            const lastPeriodIndex = currDocTxt.lastIndexOf('.')
-            const lastSentence = currDocTxt.substring(lastPeriodIndex)
+        const autocompletePrompt = currDocTxt.indexOf("/a")
+        let lastSentence = ""
+
+        if(autocompletePrompt != -1) {
+            const textBeforePrompt = currDocTxt.substring(0, autocompletePrompt)
+            console.log("test before prompt"+textBeforePrompt)
+            if(textBeforePrompt.includes(".")) {
+                lastSentence = textBeforePrompt.substring(textBeforePrompt.lastIndexOf("."), textBeforePrompt.length)
+                console.log("last sentence before prompt" + lastSentence)
+            } else lastSentence = textBeforePrompt
+        }
+
+
+        if(currDocTxt.includes("/a")) {
+
 
             postData.string = lastSentence
 
@@ -32,8 +42,8 @@ function App() {
                 .then((res) => res.json())
             console.log(res.newString)
             await setCurrDocTxt(
-              prevDocTxt => prevDocTxt.replace(lastSentence, res.newString
-              ).replace(/(\r\n|\n|\r)/gm, ""));
+                 prevDocTxt => prevDocTxt.replace(lastSentence, res.newString // Get rid of duplicate . and /a, probably better way to do this than just removing last 3 chars
+              ).replace(/(\r\n|\n|\r)/gm, "").replace("/a", ""));
 
         }
 
@@ -57,7 +67,7 @@ function App() {
         }
     }
 
-
+    
 
     return (
         <div className="App">
