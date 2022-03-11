@@ -2,6 +2,7 @@ import logo from './logo.svg'
 import './App.css'
 import React from 'react'
 import Header from './header'
+
 function App() {
 
     const [currDocTxt, setCurrDocTxt] = React.useState('')
@@ -66,8 +67,11 @@ function App() {
               ).replace(/(\r\n|\n|\r)/gm, ""));
         }
     }
-
     
+
+
+
+
 
     return (
         <div className="App">

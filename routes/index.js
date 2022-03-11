@@ -16,7 +16,7 @@ router.post('/complete', async (req, res) => {
     // resp is the object that is returned
     // return it as a response
     const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: "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",
     });
     const openai = new OpenAIApi(configuration);
 
