@@ -3,10 +3,21 @@ const bodyParser = require('body-parser')
 const router = express().use(bodyParser.json())
 const { Configuration, OpenAIApi } = require("openai");
 require('dotenv').config()
+const User = require('../models/user')
 
 router.post('/complete', async (req, res) => {
     // do something
     let needsComplete = req.body.string
+
+    const newUser = new User({
+        name: "Jeff"
+    })
+
+    try {
+        await newUser.save()
+    } catch {
+        console.log("Error creating user")
+    }
     // url = ""
     // settings = {}
     // const resp = await fetch(url, settings)
@@ -16,7 +27,7 @@ router.post('/complete', async (req, res) => {
     // resp is the object that is sent to the server
     // return it as a response
     const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: process.env.OPEN_AI_API_KEY,
     });
     const openai = new OpenAIApi(configuration);
 

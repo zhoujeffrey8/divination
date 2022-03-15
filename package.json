@@ -25,6 +25,7 @@
     "express": "^4.17.3",
     "express-ejs-layouts": "^2.5.1",
     "fetch": "^1.1.0",
+    "mongoose": "^6.2.6",
     "node-fetch": "^2.6.1",
     "nodemon": "^2.0.15",
     "openai": "^2.0.4"
