@@ -1,6 +1,6 @@
-import './App.css'
+import './pages/App.css'
 import React from 'react'
-import Header from './header'
+import Header from './components/header'
 export default function HomePage() {
 
 

@@ -1,6 +1,6 @@
-import CrystalBall from './CrystalBall.png';
+import CrystalBall from '../static/CrystalBall.png';
 import {useHotkeys} from 'react-hotkeys-hook';
-import App from './App'
+import App from '../pages/App'
  
 
 export default function Header() {
