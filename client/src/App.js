@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import DivBar from './DivBar'
+import Header from './header';
 
 function App() {
 
@@ -82,7 +82,7 @@ function App() {
         <div className="App">
         <div className="bg-slate-400">
 
-            <Header></Header>
+            <Header/>
 
 
           {/*<header className="App-header">*/}
@@ -94,8 +94,8 @@ function App() {
 
 {document.addEventListener("DOMContentLoaded", function(){
     setTimeout(function(){
-        var replacers = document.querySelectorAll('[data-replace]');
-        for(var i=0; i<replacers.length; i++){
+        const replacers = document.querySelectorAll('[data-replace]');
+        for(let i=0; i<replacers.length; i++){
             console.log('hit here2');
             let replaceClasses = JSON.parse(replacers[i].dataset.replace.replace(/'/g, '"'));
             Object.keys(replaceClasses).forEach(function(key) {
