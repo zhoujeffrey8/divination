@@ -1,7 +1,6 @@
-import logo from './logo.svg'
-import './App.css'
-import React from 'react'
-import Header from './header'
+import './App.css';
+import React from 'react';
+import DivBar from './DivBar'
 
 function App() {
 
@@ -14,6 +13,7 @@ function App() {
           string: event.target.value
         }
 
+        //auto complete
         const autocompletePrompt = currDocTxt.indexOf("/a")
         let lastSentence = ""
 
@@ -42,18 +42,23 @@ function App() {
             })
                 .then((res) => res.json())
             console.log(res.newString)
+            // if the new string doesn't contain the old string, add the old string to the new string
+            // eg. his house -> I liked his house
+            if (!res.newString.includes(lastSentence.replace("/a", ""))) {
+                res.newString = lastSentence.replace("/a", "").concat(res.newString)
+            }
             await setCurrDocTxt(
                  prevDocTxt => prevDocTxt.replace(lastSentence, res.newString // Get rid of duplicate . and /a, probably better way to do this than just removing last 3 chars
               ).replace(/(\r\n|\n|\r)/gm, "").replace("/a", ""));
 
         }
 
-
-        const questionPattern = /\[(.*)\]/g;
+        // complete question
+        const questionPattern = /\[(.*)]/g;
         const questionFound = currDocTxt.match(questionPattern);
         console.log(questionFound);
         if(Boolean(questionFound)) {
-            const res = await fetch("/complete", {
+            const res = await fetch("/question", {
                 method: "Post",
                 headers: {
                     'Content-Type': 'application/json'
@@ -67,7 +72,7 @@ function App() {
               ).replace(/(\r\n|\n|\r)/gm, ""));
         }
     }
-    
+
 
 
 
@@ -76,7 +81,7 @@ function App() {
     return (
         <div className="App">
         <div className="bg-slate-400">
-        
+
             <Header></Header>
 
 
@@ -118,6 +123,5 @@ function App() {
         </div>
     );
 }
-
 
 export default App;

@@ -1,2 +1,4 @@
 node_modules
 .env
+.idea/inspectionProfiles/Project_Default.xml
+*.xml
