@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import HomePage from './homePage'
+import Login from './Login';
+import Register from './Register';
+import Router from './Router'
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <Register></Register>
+    <Login></Login> */}
+    <BrowserRouter>
+        <Router />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

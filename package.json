@@ -20,15 +20,18 @@
   "dependencies": {
     "@craco/craco": "^5.9.0",
     "body-parser": "^1.19.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "eslint": "^7.32.0",
     "express": "^4.17.3",
     "express-ejs-layouts": "^2.5.1",
     "fetch": "^1.1.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.6",
     "node-fetch": "^2.6.1",
     "nodemon": "^2.0.15",
-    "openai": "^2.0.4"
+    "openai": "^2.0.4",
+    "react-router-dom": "^6.2.2"
   },
   "devDependencies": {
     "autoprefixer": "^9.8.8",

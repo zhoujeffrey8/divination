@@ -4,6 +4,14 @@ const router = express().use(bodyParser.json())
 const { Configuration, OpenAIApi } = require("openai");
 require('dotenv').config()
 const User = require('../models/user')
+const cors = require('cors')
+const mongoose = require('mongoose')
+const jwt = require("jsonwebtoken")
+
+router.use(cors())
+router.use(express.json())
+
+mongoose.connect(process.env.DATABASE_URL)
 
 router.post('/complete', async (req, res) => {
     // do something
@@ -81,5 +89,58 @@ router.post("/question", async (req, res) => {
 router.get("/api", (req, res) => {
     res.json({ message: "Hello from server!" });
 })
+
+
+router.post("/users/register", async (req, res) => {
+    console.log(req.body)
+    try {
+        await User.create({
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password
+        })
+        console.log("STATUS")
+		res.json({ status: 'ok' })
+    } catch(err) {
+        console.log(err)
+        res.json({status: 'error', error: 'Duplicate email'})
+    }
+})
+
+
+router.post("/users/login", async (req, res) => {
+    const user = await User.findOne({
+        email: req.body.email,
+        password: req.body.password
+    })
+
+    if(user) {
+        const token = jwt.sign({
+            name:user.name,
+            email: user.email
+        }, 'AF2R-HB7W-7THA-KERC'
+        )
+        return res.json({status: 'ok', user: token})
+    } else {
+        return res.json({status: 'ok', user: false})
+    }
+    }
+    
+)
+
+
+router.get("/users/getName", async(req, res) => {
+        const token = req.headers["x-access-token"]
+        try {
+        const decoded = jwt.verify(token, 'AF2R-HB7W-7THA-KERC')
+        const email = decoded.email
+        const user = await User.updateOne({email: email}, {$set: {name: req.body}})
+        return res.json({status: 'ok', name: user.name})
+    } catch(error) {
+        res.json({status: 'error', error: 'invalid token'})
+    }
+        
+})
+
 
 module.exports = router
