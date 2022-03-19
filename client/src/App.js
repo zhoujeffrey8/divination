@@ -17,7 +17,7 @@ function App() {
         const autocompletePrompt = currDocTxt.indexOf("/a")
         let lastSentence = ""
 
-        if(autocompletePrompt != -1) {
+        if(autocompletePrompt !== -1) {
             const textBeforePrompt = currDocTxt.substring(0, autocompletePrompt)
             console.log("test before prompt"+textBeforePrompt)
             if(textBeforePrompt.includes(".")) {
@@ -28,10 +28,7 @@ function App() {
 
 
         if(currDocTxt.includes("/a")) {
-
-
             postData.string = lastSentence
-
 
             const res = await fetch("/complete", {
                 method: "Post",
